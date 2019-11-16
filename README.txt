@@ -1,3 +1,5 @@
+Contains the initial database interface as a structure and the basic model classes
+
 Within the src (source) folder the folder:
 
 - database_interface contains the interface which is what youll want to look at most
