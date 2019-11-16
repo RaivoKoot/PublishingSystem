@@ -1,8 +1,9 @@
 package exceptions;
 
-public class InvalidAuthenticationException extends Exception{
+public class InvalidAuthenticationException extends Exception {
 
-	public InvalidAuthenticationException() {
+	public InvalidAuthenticationException()
+	{
 		super("The provided credentials for this action are not valid");
 	}
 }

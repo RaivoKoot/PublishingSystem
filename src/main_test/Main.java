@@ -1,4 +1,15 @@
-package models;
+package main_test;
+
+import models.AcceptedArticle;
+import models.Authorship;
+import models.Critique;
+import models.Edition;
+import models.Journal;
+import models.JournalEditor;
+import models.Review;
+import models.Submission;
+import models.User;
+import models.Volume;
 
 public class Main {
 	public static void main(String[] args) {

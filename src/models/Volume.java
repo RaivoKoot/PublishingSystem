@@ -4,6 +4,7 @@ public class Volume {
 	private static final String NAME_TEMPLATE = "Volume %d";
 	
 	private int volNum;
+	private String ISSN;
 	private int publicationYear;
 	
 
@@ -26,6 +27,14 @@ public class Volume {
 	public void setVolNum(int volNum)
 	{
 		this.volNum = volNum;
+	}
+	public String getISSN()
+	{
+		return ISSN;
+	}
+	public void setISSN(String iSSN)
+	{
+		ISSN = iSSN;
 	}
 	
 	public String toString() {
