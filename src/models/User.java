@@ -1,5 +1,10 @@
 package models;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import controllers.EncryptionService;
+
 public class User {
 	private String email;
 	private String forenames;
@@ -54,7 +59,13 @@ public class User {
 
 	public void setPassword(String password)
 	{
-		this.password = password;
+		try
+		{
+			this.password = EncryptionService.encryptString(password);
+		} catch (NoSuchAlgorithmException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public String toString()

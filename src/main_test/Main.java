@@ -1,5 +1,8 @@
 package main_test;
 
+import java.security.NoSuchAlgorithmException;
+
+import controllers.EncryptionService;
 import models.AcceptedArticle;
 import models.Authorship;
 import models.Critique;
@@ -13,6 +16,20 @@ import models.Volume;
 
 public class Main {
 	public static void main(String[] args) {
+		
+		try
+		{
+			String hash1 = EncryptionService.encryptString("Raivo335");
+			String hash2 = EncryptionService.encryptString("Raivo335");
+			String hash3 = EncryptionService.encryptString("Raivo333");
+			System.out.println(hash1.equals(hash2));
+			System.out.println(hash1.equals(hash3));
+			
+		} catch (NoSuchAlgorithmException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// USER TEST
 		User user = new User();
