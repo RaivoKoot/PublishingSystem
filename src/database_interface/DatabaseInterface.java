@@ -1,5 +1,6 @@
 package database_interface;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import exceptions.IncompleteInformationException;
@@ -28,7 +29,7 @@ public interface DatabaseInterface {
 	 * @throws UserAlreadyExistsException
 	 * @throws IncompleteInformationException
 	 */
-	public boolean registerBaseUser(User newUser) throws UserAlreadyExistsException, IncompleteInformationException;
+	public boolean registerBaseUser(User newUser) throws UserAlreadyExistsException, IncompleteInformationException, SQLException;
 
 	/**
 	 * Checks whether a given user with that email and password exist
@@ -37,12 +38,12 @@ public interface DatabaseInterface {
 	 * @param user must include email and password
 	 * @return success or not
 	 */
-	public boolean validCredentials(User user);
+	public boolean validCredentials(User user) throws SQLException;
 
 	/**
 	 * @return a list of all registered journals
 	 */
-	public ArrayList<Journal> getAllJournals();
+	public ArrayList<Journal> getAllJournals() throws SQLException;
 
 	/**
 	 * @precondition the given journal exists
@@ -50,7 +51,7 @@ public interface DatabaseInterface {
 	 * @return a list of all volumes belonging to that journal
 	 * @throws ObjectDoesNotExistException
 	 */
-	public ArrayList<Volume> getAllJournalVolumes(Journal journal) throws ObjectDoesNotExistException;
+	public ArrayList<Volume> getAllJournalVolumes(Journal journal) throws ObjectDoesNotExistException, SQLException;
 
 	/**
 	 * @precondition the given volume exists
@@ -58,7 +59,7 @@ public interface DatabaseInterface {
 	 * @return a list of all editions belonging to that volume
 	 * @throws ObjectDoesNotExistException
 	 */
-	public ArrayList<Edition> getAllVolumeEditions(Volume volume) throws ObjectDoesNotExistException;
+	public ArrayList<Edition> getAllVolumeEditions(Volume volume) throws ObjectDoesNotExistException, SQLException;
 
 	/**
 	 * @precondition the given edition exists
@@ -66,7 +67,7 @@ public interface DatabaseInterface {
 	 * @return a list of all articles in this edition
 	 * @throws ObjectDoesNotExistException
 	 */
-	public ArrayList<AcceptedArticle> getallEditionArticles(Edition edition) throws ObjectDoesNotExistException;
+	public ArrayList<AcceptedArticle> getallEditionArticles(Edition edition) throws ObjectDoesNotExistException, SQLException;
 
 	/**
 	 * Creates a new journal and appoints chiefEditor as the main and first editor
@@ -81,7 +82,7 @@ public interface DatabaseInterface {
 	 *                                        in use
 	 */
 	public boolean createJournal(Journal newJournal, JournalEditor chiefEditor)
-			throws UserDoesNotExistException, InvalidAuthenticationException, UniqueColumnValueAlreadyExists;
+			throws UserDoesNotExistException, InvalidAuthenticationException, UniqueColumnValueAlreadyExists, SQLException;
 
 	/**
 	 * Using a chief editor's credentials, appoints a user as an editor for a
@@ -96,7 +97,7 @@ public interface DatabaseInterface {
 	 * @throws InvalidAuthenticationException
 	 */
 	public boolean promoteUserToEditor(JournalEditor newEditor, JournalEditor journalChief)
-			throws UserDoesNotExistException, InvalidAuthenticationException;
+			throws UserDoesNotExistException, InvalidAuthenticationException, SQLException;
 
 	/**
 	 * Using the credentials of editor, creates a new volume with the next in line
@@ -110,7 +111,7 @@ public interface DatabaseInterface {
 	 * @throws InvalidAuthenticationException
 	 */
 	public Volume createNextVolume(Journal journal, JournalEditor editor, int publicationYear)
-			throws ObjectDoesNotExistException, InvalidAuthenticationException;
+			throws ObjectDoesNotExistException, InvalidAuthenticationException, SQLException;
 
 	/**
 	 * Using the credentials of editor, creates a new edition with the next in line
@@ -125,7 +126,7 @@ public interface DatabaseInterface {
 	 * @throws InvalidAuthenticationException
 	 */
 	public Edition createNextEdition(Volume volume, JournalEditor editor, String publicationMonth)
-			throws ObjectDoesNotExistException, InvalidAuthenticationException;
+			throws ObjectDoesNotExistException, InvalidAuthenticationException, SQLException;
 
 	/**
 	 * Using the credentials of author, creates a new submission and appoints thi
@@ -142,7 +143,7 @@ public interface DatabaseInterface {
 	 * @throws InvalidAuthenticationException
 	 */
 	public Submission submitArticle(Submission submission, User author)
-			throws UserDoesNotExistException, InvalidAuthenticationException;
+			throws UserDoesNotExistException, InvalidAuthenticationException, SQLException;
 
 	/**
 	 * Using the credentials of mainAuthor, appoints newAuthor as a co-author to the
@@ -161,6 +162,6 @@ public interface DatabaseInterface {
 	 * @throws InvalidAuthenticationException
 	 */
 	public boolean addCoAuthor(Submission submission, Authorship newAuthor, Authorship mainAuthor)
-			throws UserDoesNotExistException, ObjectDoesNotExistException, InvalidAuthenticationException;
+			throws UserDoesNotExistException, ObjectDoesNotExistException, InvalidAuthenticationException, SQLException;
 
 }
